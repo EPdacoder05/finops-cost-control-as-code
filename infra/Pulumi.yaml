@@ -1,0 +1,11 @@
+name: finops-cost-control-as-code
+description: 'FinOps Cost-Control-as-Code: Tags and feature flags enforce "Zero-$ Mode" guardrails. Provisions cost-saving Lambda audit and notification functions, SCPs, and a billing alarm. Designed for AWS org umbrella use; avoids all per-request charges by default.'
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-python
