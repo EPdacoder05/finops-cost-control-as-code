@@ -48,6 +48,7 @@ jobs:
         run: |
           ~/.pulumi/bin/pulumi config set --secret discord_webhook_url "${{ secrets.DISCORD_WEBHOOK_URL }}" || true
           ~/.pulumi/bin/pulumi config set --secret slack_webhook_url "${{ secrets.SLACK_WEBHOOK_URL }}" || true
+          ~/.pulumi/bin/pulumi config set aws:region "us-east-1"
           ~/.pulumi/bin/pulumi config set home_region "us-east-1"
           ~/.pulumi/bin/pulumi config set max_free_ebs_gb "30"
           ~/.pulumi/bin/pulumi config set enable_cur "false"
