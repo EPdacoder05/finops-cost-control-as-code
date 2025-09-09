@@ -4,8 +4,25 @@ import pulumi_aws as aws
 # STACK CONFIGURATION
 config = pulumi.Config()
 stack_name = pulumi.get_stack()
+
+# ENSURE AWS REGION IS SET
+aws_region = config.get("aws:region") or config.get("home_region") or "us-east-1"
+home_region = config.get("home_region") or aws_region
+
+# Configure AWS provider explicitly
+aws_provider = aws.Provider(
+    "aws-provider",
+    region=aws_region,
+    default_tags=aws.config.ProviderDefaultTagsArgs(
+        tags={
+            "project": "finops-cost-control",
+            "env": stack_name,
+            "managed-by": "pulumi"
+        }
+    )
+)
+
 webhook_url = config.get("webhook_url") or "TODO-YOUR-WEBHOOK-URL"
-home_region = config.get("home_region") or "us-east-1"
 max_free_ebs_gb = config.get_int("max_free_ebs_gb") or 30
 
 project_tags = {

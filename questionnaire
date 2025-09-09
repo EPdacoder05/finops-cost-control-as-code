@@ -1,0 +1,37 @@
+📋 Top DevOps/FinOps Interview Questions & Hints
+1. What are the key principles of FinOps, and how do they differ from traditional IT financial management?
+Hint: Compare dynamic, iterative cost control in FinOps versus static, up-front budgeting in classic IT. Reference how cost optimization is continuous in cloud, not just planning.
+
+2. Walk me through how your project handled AWS cost control using Infrastructure as Code. What pitfalls did you encounter?
+Hint: Describe automation of billing alarms, resource whitelisting, and permission-aware design. Reflect on your IAM permission challenges and how real-time alerting was implemented as a workaround.
+
+3. Cost spikes: If your billing alarms fire off at $0.80, what's your troubleshooting workflow?
+Hint: Outline how you’d use AWS Cost Explorer, resource tagging, instance right-sizing. Connect this to "Hunter Lambda" and multi-tier alerts in your architecture.
+
+4. How do you translate a flood of cost data into actionable business decisions for engineering teams?
+Hint: Reference your solution’s notification system (Discord/Slack alerts), dashboards, and how you’d summarize cost anomalies into next steps—such as decommissioning unused workloads or enforcing instance types.
+
+5. What’s your approach to multi-environment (dev/staging/prod) deployments in Pulumi—why is this critical for FinOps and DevOps?
+Hint: Talk about stack isolation and per-environment secrets. Mention how this prevents cascading cost and security failures, and how branching/deployment policies were enforced.
+
+6. Reserved Instances, Savings Plans, and Committed Use Discounts: When do you use them? What’s the catch?
+Hint: Compare AWS Reserved Instances and GCP Committed Use Discounts. Think about predictable (steady-state) versus spiky workloads. What pricing models fit best, and where do you see risk (commitment vs flexibility)?
+
+7. Imagine a GCP migration: How do you map AWS resources to GCP equivalents for FinOps automation?
+Hint: Reference your table mapping (EventBridge → Eventarc, SNS → Pub/Sub, Lambda → Cloud Functions, Billing alarms → Budgets/Notifications). Discuss potential differences in cost modeling, alerting, and access controls.
+
+8. Security: How do you ensure cloud cost monitoring doesn’t expose or leak sensitive financial or service data?
+Hint: Mention use of IAM least-privilege roles, encrypted secrets (Pulumi configs), and secure handling of webhook URLs for notifications. Relate this to compliance and auditability requirements.
+
+9. What are the main KPIs or metrics you’d monitor for a cloud cost control solution, and how would you report them?
+Hint: Think beyond “total cost”—include cost by environment, rate of growth, alarm triggers, anomaly detection, unused resource counts, notification volume, and savings achieved.
+
+10. Scenario: Accidental mass resource deletion—how does your project prevent, identify, and recover from this?
+Hint: Use your experience with Pulumi preview, resource name strategies, version control (backups), and explain the recovery workflow.
+
+✅ For Each Question:
+Use your project reference guide (PDF/Markdown) to recall exact architecture and troubleshooting steps.
+
+Map your answers to real lessons learned and fixes you applied—not just theory.
+
+When stuck, use reference docs (Pulumi, AWS/GCP, FinOps.org) for specific implementation details.

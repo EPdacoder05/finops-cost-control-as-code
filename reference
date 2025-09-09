@@ -1,0 +1,59 @@
+# 📌 Project Summary: FinOps Cost Control as Code
+
+## 🎯 Objective
+To design and implement a multi-stack FinOps automation framework using Pulumi, AWS, and GitHub Actions, enabling Dev/Stage/Prod infrastructure environments with secure secret management, automated cost controls, and CI/CD delivery.
+
+## 🛠️ Key Deliverables
+
+### Infrastructure as Code (IaC)
+- Built a multi-stack Pulumi setup (dev, staging, prod) with shared `Pulumi.yaml` and per-stack `Pulumi.<stack>.yaml`
+- Automated provisioning of core AWS resources:
+  - S3 Buckets (storage + state artifacts)
+  - Lambda Functions (cost monitoring, anomaly detection, notifications)
+  - CloudWatch Billing Alarms
+  - SNS Topics for multi-channel alerts
+
+### Multi-Environment Deployment
+- Created and pushed GitHub branches (main, dev, staging)
+- Defined isolated stack configurations with secrets for Discord/Slack webhooks and parameters like:
+  - `home_region`
+  - `max_free_ebs_gb` 
+  - `enable_cur` (Cost & Usage Reports)
+  - `enable_anomaly_detection`
+
+### Secrets Management & Security
+- Used Pulumi secrets for webhooks and sensitive config values (avoiding plaintext YAML)
+- Integrated GitHub Actions secrets (`PULUMI_CONFIG__*`) for CI/CD
+- IAM hardening: GitHub bot user only has least-privilege AWS access
+
+### CI/CD Integration
+- Automated deployments with GitHub Actions workflows
+- Each PR to dev or staging runs preview/validation, main applies to production
+- Logs and deployment history are visible in Pulumi Cloud
+
+### Monitoring & Logging
+- Lambda logs available via CloudWatch
+- IAM policy added for `logs:FilterLogEvents` and related permissions
+- Alarms trigger Slack/Discord notifications for cost spikes and anomalies
+
+## 📈 Results & Benefits
+- **Consistency**: Every environment (dev/staging/prod) deploys with the same IaC source of truth
+- **Security**: No hard-coded secrets, encrypted webhooks, and least-privilege IAM policies
+- **Automation**: GitHub Actions handles deployments on push; no manual intervention needed
+- **Visibility**: Billing alarms + multi-channel alerts ensure proactive cost monitoring
+- **Scalability**: The same pattern can be extended for more services (EC2, RDS, EKS, etc.)
+
+## 📚 References for Re-Use
+- [Pulumi Multi-Stack Docs](https://www.pulumi.com/docs/concepts/stack/) → Pulumi Stacks & Config
+- [Secrets in Pulumi](https://www.pulumi.com/docs/concepts/secrets/) → Pulumi Config & Secrets
+- [AWS Billing Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) → CloudWatch Billing Alarms
+- [GitHub Actions + Pulumi](https://github.com/pulumi/actions) → Pulumi GitHub Action
+
+## 🚀 Final Note for Presentation
+This project demonstrates **FinOps as Code** — combining Infrastructure as Code (Pulumi), CI/CD (GitHub Actions), and Cloud Security/Cost Management (AWS IAM, Billing, Lambda, Alarms) into a single, automated, multi-environment framework.
+
+### It's a DevOps + FinOps showcase that highlights:
+- **Cloud automation expertise** (AWS, Pulumi)
+- **CI/CD workflows** (GitHub Actions)
+- **Security practices** (secrets, IAM least privilege)
+- **Cost optimization & monitoring** (CloudWatch + Alarms + Multi-channel alerts)

@@ -23,7 +23,7 @@ Pulumi.dev.yaml       # keep local dev config out of git
 Pulumi.staging.yaml   # can keep in git if you want, but avoid secrets
 Pulumi.prod.yaml
 
-# AWS creds and secrets - NEVER COMMIT THESE!
+# AWS stuff
 *.json
 *.pem
 aws-credentials*
