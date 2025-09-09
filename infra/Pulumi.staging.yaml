@@ -4,10 +4,4 @@ config:
   finops-cost-control-as-code:max_free_ebs_gb: "30"
   finops-cost-control-as-code:enable_cur: "false"
   finops-cost-control-as-code:enable_anomaly_detection: "false"
-  finops-cost-control-as-code:webhook_url:
-    secure: AAABAC9xXWjxJ2yrEtFm/JfI1q1kxvQK4aw1si/XE4g8fOiQ+capUlu++PVk5A2NvKVysSrAyu5vvU5pyF5eRm1Ln0TW4o3zMGS1hTqWvx/JffCyDuA2LR1xr2NV0TmHU3qEFzEcIvsJM07OzDUaqIYG26CYLoeASQEchSNv0HlwZXFYcMz3YgjLXZVURvSaqzmF6B+eWvJ/
-  finops-cost-control-as-code:slack_webhook_url:
-    secure: AAABAJ/v36Zre6jUMRZmouPwp1uPWed6SAf9kuUQvbGAX/RV6qAexnr67t5Lo6xtgY0jNNGxzDgT7QGegaYv/MQ2rdwV3ikYDlhErgLKFOBp1K2I4P31l43nGnfVN2f3aCMyCemSPYb0qL1+/XF/VX4=
-  finops-cost-control-as-code:discord_webhook_url:
-    secure: AAABAKJVDDfG0HcTwWOVgZNMN36iaXZ8+YgyHTl7sl9rztzmyE4EdgN+U9trHAw7FepKRPF4A/INQDF5QRFEIljLemyKvBXc2RZakVCN2Rc/6EbwEJ6+Syg5Jo3ZtOIquuSKMjoEXGrF0NNTR0jSLvo=
   aws:profile: default
