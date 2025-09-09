@@ -1,0 +1,5 @@
+# Sensitive AWS files
+*.json
+aws-credentials*
+*.pem
+Pulumi.*.yaml
