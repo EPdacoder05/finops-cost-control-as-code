@@ -1,2 +1,4 @@
 *.pyc
 venv/
+# Pulumi secret files - NEVER COMMIT!
+Pulumi.*.yaml
