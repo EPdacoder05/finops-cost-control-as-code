@@ -1,0 +1,64 @@
+name: Deploy FinOps Infra
+
+on:
+  push:
+    branches:
+    - main
+    - staging
+    - dev 
+  schedule:
+    - cron: "0 0 */14 * *"  # bi-weekly check (every 14 days at midnight UTC)
+  workflow_dispatch:  # manual trigger button in GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          
+      - name: Install Pulumi CLI
+        run: curl -sSL https://get.pulumi.com | sh
+        
+      - name: Install dependencies
+        working-directory: infra
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Pulumi Login (service)
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+        run: ~/.pulumi/bin/pulumi login
+        
+      - name: Select stack
+        working-directory: infra
+        run: |
+          ~/.pulumi/bin/pulumi stack select ${INPUT_STACK:-dev} || ~/.pulumi/bin/pulumi stack init ${INPUT_STACK:-dev}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+      - name: Configure Pulumi secrets from GitHub
+        working-directory: infra
+        run: |
+          ~/.pulumi/bin/pulumi config set --secret discord_webhook_url "${{ secrets.DISCORD_WEBHOOK_URL }}" || true
+          ~/.pulumi/bin/pulumi config set --secret slack_webhook_url "${{ secrets.SLACK_WEBHOOK_URL }}" || true
+          ~/.pulumi/bin/pulumi config set home_region "us-east-1"
+          ~/.pulumi/bin/pulumi config set max_free_ebs_gb "30"
+          ~/.pulumi/bin/pulumi config set enable_cur "false"
+          ~/.pulumi/bin/pulumi config set enable_anomaly_detection "false"
+          
+      - name: Deploy stack
+        working-directory: infra
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          PULUMI_CONFIG__discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PULUMI_CONFIG__slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: ~/.pulumi/bin/pulumi up --yes

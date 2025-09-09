@@ -1,5 +1,39 @@
-# Sensitive AWS files
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.sqlite3
+
+# Virtual envs
+venv/
+env/
+.venv/
+ENV/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pulumi
+*.bak
+Pulumi.*.yaml.backup
+Pulumi.dev.yaml       # keep local dev config out of git
+Pulumi.staging.yaml   # can keep in git if you want, but avoid secrets
+Pulumi.prod.yaml
+
+# AWS creds and secrets - NEVER COMMIT THESE!
 *.json
-aws-credentials*
 *.pem
-Pulumi.*.yaml
+aws-credentials*
+*-credentials.json
+.aws/
+
+# Logs
+*.log
+
+# Sensitive config files
+.env
+.env.*
+secrets.*
