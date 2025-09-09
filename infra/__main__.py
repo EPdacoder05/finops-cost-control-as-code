@@ -5,7 +5,6 @@ import pulumi_aws as aws
 config = pulumi.Config()
 stack_name = pulumi.get_stack()
 
-# ENSURE AWS REGION IS SET
 aws_region = config.get("aws:region") or config.get("home_region") or "us-east-1"
 home_region = config.get("home_region") or aws_region
 
@@ -13,13 +12,6 @@ home_region = config.get("home_region") or aws_region
 aws_provider = aws.Provider(
     "aws-provider",
     region=aws_region,
-    default_tags=aws.config.ProviderDefaultTagsArgs(
-        tags={
-            "project": "finops-cost-control",
-            "env": stack_name,
-            "managed-by": "pulumi"
-        }
-    )
 )
 
 webhook_url = config.get("webhook_url") or "TODO-YOUR-WEBHOOK-URL"
