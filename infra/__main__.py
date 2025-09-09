@@ -169,7 +169,7 @@ aws.lambda_.Permission(
 # CloudWatch Billing Alarm ($0.01 tripwire)
 billing_alarm = aws.cloudwatch.MetricAlarm(
     "billingAlarm",
-    name="Billing-Alarm-Free-Guard",           # ← ADD this line instead
+    name="Billing-Alarm-Free-Guard",           
     alarm_description="Alert when estimated charges exceed $0.01",
     comparison_operator="GreaterThanThreshold",
     evaluation_periods=1,
@@ -181,6 +181,38 @@ billing_alarm = aws.cloudwatch.MetricAlarm(
     alarm_actions=[alerts_topic.arn],
     dimensions={"Currency": "USD"},
     tags=project_tags
+)
+
+
+prevention_policy = aws.organizations.Policy(
+    "preventionSCP",
+    name="FinOps-Cost-Prevention-SCP",
+    description="Prevent expensive AWS services from being created",
+    type="SERVICE_CONTROL_POLICY",
+    content="""{
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DenyExpensiveServices",
+          "Effect": "Deny",
+          "Action": [
+            "redshift:*",
+            "elasticsearch:*",
+            "sagemaker:*",
+            "databrew:*",
+            "mwaa:*",
+            "emr:*",
+            "ec2:RunInstances"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "ForAllValues:StringNotEquals": {
+              "ec2:InstanceType": ["t2.micro", "t3.micro"]
+            }
+          }
+        }
+      ]
+    }"""
 )
 
 # Optional resources (feature flags)
