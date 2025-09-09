@@ -5,7 +5,7 @@ import pulumi_aws as aws
 config = pulumi.Config()
 stack_name = pulumi.get_stack()
 
-aws_region = config.get("aws:region") or config.get("home_region") or "us-east-1"
+aws_region = config.get("aws:region") or "us-east-1"
 home_region = config.get("home_region") or aws_region
 
 # Configure AWS provider explicitly
