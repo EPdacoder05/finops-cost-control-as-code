@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2025-09-08T21:44:39.670226-04:00",
+            "magic": "062eea212ab292d07fc16efdd6e199c590be5a1533ad8d8fb62d23b27abd0d50",
+            "version": "v3.193.0"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "EPdacoder05-org",
+                "project": "finops-cost-control-as-code",
+                "stack": "dev"
+            }
+        },
+        "metadata": {}
+    }
+}
