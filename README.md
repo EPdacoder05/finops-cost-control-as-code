@@ -4,6 +4,8 @@
 
 **🔒 SECURITY STATUS:** ✅ **BULLETPROOF** - 30+ attack patterns mitigated, 41 tests passing
 
+**🚀 DEPLOYMENT READY:** This repository serves as a **security template** for multi-repository deployment
+
 ---
 
 ## 🛡️ Security Features
@@ -18,6 +20,26 @@ This repository implements **enterprise-grade security** with comprehensive prot
 - ✅ **100% Test Coverage** - 41 security tests passing
 
 **📚 Full Security Documentation:** [docs/SECURITY.md](docs/SECURITY.md)
+
+---
+
+## 🚀 Deploy Security to Other Repositories
+
+This repository can be used as a **security template** for other projects:
+
+```bash
+# Deploy all security modules to another repository
+python scripts/deploy_security.py ../target-repo
+
+# Deploy specific module groups
+python scripts/deploy_security.py ../target-repo --modules ai-era
+python scripts/deploy_security.py ../target-repo --modules input-validation
+
+# See available module groups
+python scripts/deploy_security.py --list
+```
+
+**See:** [scripts/README.md](scripts/README.md) for deployment guide
 
 ---
 

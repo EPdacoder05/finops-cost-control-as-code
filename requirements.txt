@@ -1,0 +1,16 @@
+# Security Framework Requirements
+# Core dependencies for the enterprise security framework
+
+# Testing
+pytest>=7.0.0
+
+# AWS SDK (for Lambda functions)
+boto3>=1.26.0
+
+# Cryptography (optional - for encryption features)
+# cryptography>=41.0.0
+
+# Code quality
+# pylint>=2.17.0
+# black>=23.0.0
+# mypy>=1.0.0
