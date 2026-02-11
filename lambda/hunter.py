@@ -136,7 +136,7 @@ def lambda_handler(event, context):
     findings.append(section("Public S3 buckets (check!)", pub_buckets))
 
     # Compose message
-    title = f"FinOps Hunter — {datetime.datetime.now(datetime.timezone.utc).isoformat()}Z"
+    title = f"FinOps Hunter — {datetime.datetime.now(datetime.timezone.utc).isoformat()}"
     body = f"**{title}**\n" + "\n".join(findings)
     
     # Limit message size to prevent DoS

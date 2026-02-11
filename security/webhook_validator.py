@@ -157,27 +157,30 @@ class WebhookValidator:
         if not hostname:
             return False
         
-        # Check for IPv4 private ranges
+        # Try using ipaddress module if available
+        try:
+            import ipaddress
+            ip = ipaddress.ip_address(hostname)
+            return ip.is_private
+        except (ImportError, ValueError):
+            pass
+        
+        # Fallback: Check for IPv4 private ranges manually
         private_ranges = [
             "10.",          # 10.0.0.0/8
-            "172.16.",      # 172.16.0.0/12
-            "172.17.",
-            "172.18.",
-            "172.19.",
-            "172.20.",
-            "172.21.",
-            "172.22.",
-            "172.23.",
-            "172.24.",
-            "172.25.",
-            "172.26.",
-            "172.27.",
-            "172.28.",
-            "172.29.",
-            "172.30.",
-            "172.31.",
             "192.168.",     # 192.168.0.0/16
         ]
+        
+        # Check 172.16.0.0/12 range (172.16.0.0 - 172.31.255.255)
+        if hostname.startswith("172."):
+            parts = hostname.split(".")
+            if len(parts) >= 2:
+                try:
+                    second_octet = int(parts[1])
+                    if 16 <= second_octet <= 31:
+                        return True
+                except ValueError:
+                    pass
         
         for prefix in private_ranges:
             if hostname.startswith(prefix):
