@@ -38,3 +38,6 @@ aws-credentials*
 .env
 .env.*
 secrets.*
+
+# EP reference doc
+ep-reference.md
