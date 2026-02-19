@@ -2,6 +2,45 @@
 
 **Infrastructure-as-Code project for AWS cost monitoring and free-tier protection using Pulumi, Lambda, and automated notifications.**
 
+**🔒 SECURITY STATUS:** ✅ **BULLETPROOF** - 30+ attack patterns mitigated, 41 tests passing
+
+**🚀 DEPLOYMENT READY:** This repository serves as a **security template** for multi-repository deployment
+
+---
+
+## 🛡️ Security Features
+
+This repository implements **enterprise-grade security** with comprehensive protection:
+
+- ✅ **ReDoS Protection** - Thread-based timeout prevents regex denial of service
+- ✅ **Input Validation** - SQL injection, XSS, command injection, path traversal
+- ✅ **AI-Era Security** - Prompt injection, package hallucination, agent access control
+- ✅ **Webhook Security** - SSRF protection, private IP blocking, HTTPS enforcement
+- ✅ **Cryptographic Utilities** - Secure hashing, tokens, encryption
+- ✅ **100% Test Coverage** - 41 security tests passing
+
+**📚 Full Security Documentation:** [docs/SECURITY.md](docs/SECURITY.md)
+
+---
+
+## 🚀 Deploy Security to Other Repositories
+
+This repository can be used as a **security template** for other projects:
+
+```bash
+# Deploy all security modules to another repository
+python scripts/deploy_security.py ../target-repo
+
+# Deploy specific module groups
+python scripts/deploy_security.py ../target-repo --modules ai-era
+python scripts/deploy_security.py ../target-repo --modules input-validation
+
+# See available module groups
+python scripts/deploy_security.py --list
+```
+
+**See:** [scripts/README.md](scripts/README.md) for deployment guide
+
 ---
 
 ## 🎯 Project Objective

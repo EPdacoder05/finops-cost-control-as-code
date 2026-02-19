@@ -5,6 +5,7 @@ __pycache__/
 *.pyd
 *.pkl
 *.sqlite3
+.pytest_cache/
 
 # Virtual envs
 venv/
